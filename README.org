@@ -8,9 +8,9 @@ Download from Github
 
 ** Usage
 
-Start utilities with:
+Start utilities with Clojure REPL (Read Evaluate Print Loop):
 #+begin_src shell
-  lein run
+  lein repl
 #+end_src
 
 Then at the Clojure REPL, you can send UDP packets with:
