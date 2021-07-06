@@ -17,9 +17,14 @@ Then at the Clojure REPL, you can send UDP packets with:
 #+begin_src clojure
   ;; Create socketand bind to a port number
   (def socket (DatagramSocket. 4479))
+
   ;; Send a message in a UDP Packet
   ;; Packet will appear to come from port 4479.
   (send socket "Hello" "localhost" 4478)
+
+  ;; Listen on a socket for data and
+  ;; pass them to a function once received.
+  (receive-loop socket println)
 #+end_src
 
 ** License
