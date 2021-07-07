@@ -1,4 +1,5 @@
 (ns messages-utils.core
+  (:require [messages-utils.queue :as queue])
   (:gen-class))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
