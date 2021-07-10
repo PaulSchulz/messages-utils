@@ -1,4 +1,4 @@
-(ns clojure-sqlite-example.core
+(ns clojure-sqlite.core
   (:require [clojure.java.jdbc :refer :all])
   (:gen-class))
 
@@ -26,6 +26,20 @@
        (catch Exception e
          (println (.getMessage e)))))
 
+(defn create-db-queue
+  "create message table"
+  []
+  (try (db-do-commands db
+                       (create-table-ddl :messages
+                                         [[:timestamp :datetime :default :current_timestamp ]
+                                          [:to      :text]
+                                          [:from    :text]
+                                          [:message :text]
+                                          [:delay   :text]]
+                                         ))
+       (catch Exception e
+         (println (.getMessage e)))))
+
 (defn print-result-set
   "prints the result set in tabular form"
   [result-set]
@@ -41,8 +55,11 @@
   "launch!"
   []
   (create-db)
+  (create-db-queue)
   (insert! db :news testdata)
-  (print-result-set (output)))
+  (insert! db :messages {:to "4476"
+                         :from "4478"
+                         :message "CO2 building up"
+                         :delay "7m"})
 
-                                        ;(comment keys (first output))
-                                        ;(comment :body (first output))))
+  (print-result-set (output)))
